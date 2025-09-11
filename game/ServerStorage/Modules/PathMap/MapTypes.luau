@@ -35,7 +35,7 @@ export type PathMap = {
 --// RegionMap defintion
 export type RegionMap = {
     --// String id for current region
-    Id:               string,
+    Id:                string,
     --// Node path mapping for nodes within the region
     Nodes:             NodePathMap,
     --// Node mapping for connected regions
@@ -69,7 +69,7 @@ export type NodePathMap = {
     --// Create a new path inside of a NodePath
     NewPath:     (self: NodePathMap, nodePath: {Node}, isValid: ((self: NodePath) -> boolean)?) -> NodePath,
     --// Create a new NodePath
-    NewNodePath: (self: NodePathMap, nodePathId: string, nodePath: {[string]: {NodePath}}) -> ()
+    NewSourceNodePath: (self: NodePathMap, nodePathId: string, nodePath: {[string]: {NodePath}}) -> ()
 }
 
 return {}

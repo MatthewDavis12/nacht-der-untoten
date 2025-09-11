@@ -26,26 +26,9 @@ return setmetatable({}, {__call = function(self: any): MapTypes.NodePathMap
         end,
 
         --// Create new NodePath mappings for new nodes.
-        NewNodePath = function(self: MapTypes.NodePathMap, nodeId: string, nodePath: {[string]: {MapTypes.NodePath}})
+        NewSourceNodePath = function(self: MapTypes.NodePathMap, nodeId: string, nodePath: {[string]: {MapTypes.NodePath}})
             self[nodeId] = nodePath
         end
     }
 end})
 
-
---[[
-local R1_NPM: MapTypes.NodePathMap = NPMRegister()
-
---// 
-R1_NPM:NewNodePath("A", {
-    B = {
-        R1_NPM:NewPath({A, B, C}, function(): boolean
-            return true
-        end) 
-    },
-    C = {},
-    D = {},
-})
-
-
-]]

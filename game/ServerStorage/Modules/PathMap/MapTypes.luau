@@ -5,10 +5,10 @@
 --
 --   Created By: IAmKingMatt
 --   Date Created: 09/10/2025
-type Node = Part
+export type Node = Part
 
 --// A list of region paths that can be validated.
-type RegionPath = {
+export type RegionPath = {
     --// Path of regions
     Path:    {string},
     --// Validation function for the path
@@ -20,7 +20,7 @@ export type NodePath = {
     --// Path of nodes
     Path:    {Node},
     --// Validation function for the path
-    IsValid: (self: NodePath) -> boolean    
+    IsValid: (self: NodePath) -> boolean 
 }
 
 --// PathMap type definition
@@ -64,7 +64,12 @@ export type BridgePathMap = {
 
 --// NodePathMap type definition
 export type NodePathMap = {
-    [string]: {NodePath}
+    --// Mapping of start nodes and all possible paths
+    [string]:    {[string]: {NodePath}},
+    --// Create a new path inside of a NodePath
+    NewPath:     (self: NodePathMap, nodePath: {Node}, isValid: ((self: NodePath) -> boolean)?) -> NodePath,
+    --// Create a new NodePath
+    NewNodePath: (self: NodePathMap, nodePathId: string, nodePath: {[string]: {NodePath}}) -> ()
 }
 
 return {}

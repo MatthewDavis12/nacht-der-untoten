@@ -1,0 +1,48 @@
+{
+  "name": "nacht-der-untoten",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "$path": "game/ReplicatedStorage"
+    },
+
+    "ServerScriptService": {
+      "$className": "ServerScriptService",
+      "$path": "game/ServerScriptService"
+    },
+
+    "ServerStorage": {
+      "$className": "ServerStorage",
+      "$path": "game/ServerStorage"
+    },
+
+    "StarterPlayer": {
+      "$className": "StarterPlayer",
+      "StarterPlayerScripts": {
+        "$className": "StarterPlayerScripts",
+        "$path": "game/StarterPlayer/StarterPlayerScripts"
+      },
+      "StarterCharacterScripts": {
+        "$className": "StarterCharacterScripts",
+        "$path": "game/StarterPlayer/StarterCharacterScripts"
+      }
+    },
+
+    "StarterGui": {
+      "$className": "StarterGui",
+      "$path": "game/StarterGui"
+    },
+
+    "StarterPack": {
+      "$className": "StarterPack"
+    },
+
+    "SoundService": {
+      "$properties": {
+        "RespectFilteringEnabled": true
+      }
+    }
+  }
+}

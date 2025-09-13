@@ -68,8 +68,13 @@ return setmetatable({}, {__call = function(self, regionName: string): MapTypes.R
             end
 
             --// Add the connected region bridge node then return path
-            table.insert(nodePath.Path, bridgePath[2])
-            return nodePath
+            local newNodePath: MapTypes.NodePath = {
+                Path = {unpack(nodePath.Path)},
+                IsValid = nodePath.IsValid
+            }
+
+            table.insert(newNodePath.Path, bridgePath[2])
+            return newNodePath
         end,
     }
 end})

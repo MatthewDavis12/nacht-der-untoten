@@ -1,8 +1,8 @@
 --!nonstrict
 --// Test
 local MyPM = require("../ServerStorage/Modules/NachtDerUntoten")
-local Region: string = "Region1"
-local srcNodes: {string} = {"A", "B", "C", "D", "E", "F", "G", "H"}
+local srcRegion: string = "Region1"
+local srcNodes: string = "E1"
 
 for i = 5, 1, -1 do
     print(`Waiting Until Test: {i}s`)
@@ -15,28 +15,14 @@ local zombie: Model = workspace:FindFirstChild("Zombie") :: Model
 --// Region1 Nodes
 local pathMap = workspace:FindFirstChild("PathMap") :: Instance
 local r1File = pathMap:FindFirstChild("Region1") :: Instance
-local r1Nodes = r1File:GetChildren()
+local path = MyPM:GetPath(srcRegion, "Region2", srcNodes, "")
 
-for _, srcNode: string in pairs(srcNodes) do
-    for _, node in pairs(r1Nodes) do
-        if node.Name == srcNode then
-            continue
-        end
+local hum: Humanoid = zombie:FindFirstChild("Zombie") :: Humanoid
+local srcNode: Part = r1File:FindFirstChild(srcNodes) :: Part
+zombie:MoveTo(srcNode.Position + Vector3.new(0, 3.5, 0))
 
-        print(`Path: {srcNode} -> {node.Name}`)
-        local path = MyPM:GetPath(Region, Region, srcNode, node.Name)
-        if not path then
-            return
-        end
-
-        local hum: Humanoid = zombie:FindFirstChild("Zombie") :: Humanoid
-        local root = zombie:FindFirstChild("Torso") :: Part
-        root.CFrame = r1File[srcNode].CFrame * CFrame.new(0, 3.5, 0)
-
-        print(`Moving Zombie: {root}, {hum}`)
-        for _, waypoint: Part in ipairs(path.Path) do
-            hum:MoveTo(waypoint.Position, waypoint)
-            hum.MoveToFinished:Wait()
-        end
-    end
+for _, node: Part in ipairs(path.Path) do
+    print(node, typeof(node))
+    hum:MoveTo(node.Position, node)
+    hum.MoveToFinished:Wait()
 end

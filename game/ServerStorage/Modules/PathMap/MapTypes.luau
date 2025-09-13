@@ -50,24 +50,31 @@ export type RegionMap = {
 
 --// RegionPathMap type definition
 export type RegionPathMap = {
-    --// string: The destination region
+    --// string: The source region
+    --   [string]: Destination region
     --   RegionPathList: List of all possible paths to destination region
-    [string]: {RegionPath}
+    [string]:            {[string]: {RegionPath}},
+    --// Creates new source region path
+    NewSourceRegionPath: (self: RegionPathMap, srcRegion: string, regionPath: {[string]: {RegionPath}})->(),
+    --// Create new region path in a source Region Path
+    NewRegionPath:       (self: RegionPathMap, regionPath: {string}, isValid: ((self: RegionPath)->boolean)?) -> RegionPath
 }
 
 --// BridgePathMap type definition
 export type BridgePathMap = {
     --// string: The connected region we're mapping to.
     --   {Node}: The nodes that can be used to get to that region
-    [string]: {Node}
+    [string]: {{Node}},
+    --// Add new bridge node path
+    NewBridgePath: (self: BridgePathMap, region: string, bridgePath: {{Node}}) -> ()
 }
 
 --// NodePathMap type definition
 export type NodePathMap = {
     --// Mapping of start nodes and all possible paths
-    [string]:    {[string]: {NodePath}},
+    [string]:          {[string]: {NodePath}},
     --// Create a new path inside of a NodePath
-    NewPath:     (self: NodePathMap, nodePath: {Node}, isValid: ((self: NodePath) -> boolean)?) -> NodePath,
+    NewPath:           (self: NodePathMap, nodePath: {Node}, isValid: ((self: NodePath) -> boolean)?) -> NodePath,
     --// Create a new NodePath
     NewSourceNodePath: (self: NodePathMap, nodePathId: string, nodePath: {[string]: {NodePath}}) -> ()
 }
